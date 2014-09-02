@@ -18,6 +18,8 @@ struct1 = MyStruct(t: 10, u: "You")
 let struct2 = MyStruct(t: 12, u: "World")
 //struct2.u = "Planet" // Error: struct2 is immutable
 //struct2 = MyStruct(t: 10, u: "Defeat") // Error: struct2 is an immutable ref
+// Reason: Because in Swift, struct is value type.
+
 
 class MyClass {
   let t = 12
@@ -35,12 +37,17 @@ class1.u = "GoodBye"
 class1 = MyClass(t: 10, u: "You")
 
 let class2 = MyClass(t: 12, u: "World")
-class2.u = "Planet" // No error
+
+class2.u = "Planet" // No error, Pay attention to here
+// Although class is let, you still can modify u
+// Reason: Because in Swift, class is reference type.
+
 //class2 = MyClass(t: 11, u: "Geoid") Error: class2 is an immutable reference
 
 
 var array1 = [1,2,3,4]
 array1.append(5)
+array1
 array1[0] = 27
 array1
 array1 = [3,2]
@@ -55,7 +62,7 @@ let array2 = [4,3,2,1]
   AnyObject
 ******************/
 
-let myString: AnyObject = "hello"
+let myString: AnyObject = "Hello World"
 myString.cornerRadius // Returns nil
 
 func someFunc(parameter: AnyObject!) {
@@ -69,6 +76,7 @@ func someOtherFunc(parameter: AnyObject!) {
   // Do something
 }
 
+// Top-tip: Casting array is still easy
 func someArrayFunc(parameter: [AnyObject]!) {
   let newArray = parameter as [NSString]
   // Do something
